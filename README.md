@@ -18,9 +18,28 @@ samples, guidance on mobile development, and a full API reference.
 ## 1. Research: ThemeData Class in Flutter
 
 - Keywords:
-    - _[Add here a list of important keywords about the topic]_
-    - ...
-- Video Title: _[title for the video that contains high ranking keywords]_
+    - flutter themedata generator
+    - flutter themedata(primaryswatch)
+    - themedata flutter example
+    - flutter themedata text color
+    - themedata.dark flutter
+    - flutter themedata color scheme
+    - flutter custom themedata
+    - flutter themedata secondary color
+    - flutter themedata example
+    - flutter themedata color scheme
+    - flutter themedata light
+    - flutter themedata secondary color
+    - flutter primaryswatch example
+    - flutter primaryswatch materialcolor
+    - flutter theme extension
+    - flutter theme text color
+    - flutter text theme generator
+    - flutter text theme
+    - flutter themes
+    - flutter themedata
+- Video Title: Flutter ThemeData Class - ThemeData example with Themes, TextThemes, ButtonThemes and
+  much more
 
 ## 2. Research: Competitors
 
