@@ -141,11 +141,182 @@ this [link](https://medium.flutterdevs.com/multi-theme-using-provider-in-flutter
 
 **The Structured Main Content**
 
-1. `my_app.dart` contains styles and theming properties of this app. Its `home` argument calls
-   the `HomePage` widget from `home_page.dart` class.
-2. `home_page.dart` class contains TextField, TextFormField, ElevatedButton, OutlinedButton,
+1. `home` property of `main.dart` calls the `HomePage` widget from `home_page.dart` class.
+2. Some general rules:
+    - For Text of body and TextField label, text style is defined in textTheme with bodyMedium and
+      titleMedium:
+    - `displaySmall` is used to to directly apply this style to any text widget. It is used in the
+      last children of Column in HomePage widget.
+3. `theme` property of `MaterialApp` widget accepts `ThemeData` widget. You can define all theming
+   properties of app here. These properties are automatically applied to the corresponding fields
+   automatically in app everywhere.
+
+   ![](screenshots/ThemeDataGeneralConfig.PNG)
+   ![](screenshots/ThemeDataColor.PNG)
+   ![](screenshots/ThemeDataTypography.PNG)
+   ![](screenshots/ThemeDataComponentThemes1.PNG)
+   ![](screenshots/ThemeDataComponentThemes2.PNG)
+
+4. `styles.dart` contains styles of text:
+
+```dart
+import 'package:flutter/material.dart';
+
+const bodyMediumStyle = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+);
+
+const titleMediumStyle = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+  color: Colors.green,
+);
+
+const displaySmallStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: Colors.red,
+);
+
+const appBarTitleTextStyle = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+);
+
+final elevatedButtonStyle = ElevatedButton.styleFrom(
+  backgroundColor: Colors.blueAccent,
+  foregroundColor: Colors.amber,
+  shape: BeveledRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+  padding: const EdgeInsets.symmetric(
+    vertical: 10,
+    horizontal: 50,
+  ),
+  textStyle: const TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  ),
+  elevation: 10,
+  minimumSize: const Size(250, 50),
+);
+
+final outlinedButtonStyle = OutlinedButton.styleFrom(
+  backgroundColor: Colors.white,
+  foregroundColor: Colors.black,
+  // shape: const CircleBorder(eccentricity: .9),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(50)),
+  ),
+  padding: const EdgeInsets.symmetric(
+    vertical: 10,
+    horizontal: 50,
+  ),
+  textStyle: const TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  ),
+  elevation: 10,
+  minimumSize: const Size(250, 50),
+);
+
+final textButtonStyle = TextButton.styleFrom(
+  foregroundColor: Colors.green,
+  backgroundColor: Colors.red,
+  shape: ContinuousRectangleBorder(
+    borderRadius: BorderRadius.circular(100),
+  ),
+  padding: const EdgeInsets.symmetric(
+    vertical: 10,
+    horizontal: 50,
+  ),
+  textStyle: const TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+  ),
+  elevation: 0,
+  minimumSize: const Size(300, 50),
+);
+
+const dialogContentTextStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.amber,
+);
+
+const dialogTitleTextStyle = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+  color: Colors.red,
+);
+
+const tooltipTextStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+);
+
+```
+
+5. `theme.dart` contains theming properties of app:
+
+```dart
+import 'package:flutter/material.dart';
+import 'styles.dart';
+
+final myTheme = ThemeData(
+  primarySwatch: Colors.deepOrange,
+  brightness: Brightness.light,
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    titleTextStyle: appBarTitleTextStyle,
+  ),
+  textTheme: const TextTheme(
+    // For text of body
+    bodyMedium: bodyMediumStyle,
+    // For text of TextField and TextFormField
+    titleMedium: titleMediumStyle,
+    // Customized text style
+    displaySmall: displaySmallStyle,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
+  outlinedButtonTheme: OutlinedButtonThemeData(style: outlinedButtonStyle),
+  textButtonTheme: TextButtonThemeData(style: textButtonStyle),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    shape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    iconSize: 50,
+    elevation: 30,
+    backgroundColor: Colors.amber,
+  ),
+  tooltipTheme: TooltipThemeData(
+    textStyle: tooltipTextStyle,
+    decoration: BoxDecoration(
+      color: Colors.grey[500],
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+  dialogTheme: DialogTheme(
+    titleTextStyle: dialogTitleTextStyle,
+    contentTextStyle: dialogContentTextStyle,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30),
+    ),
+  ),
+  snackBarTheme: const SnackBarThemeData(
+    backgroundColor: Colors.blueGrey,
+    actionTextColor: Colors.amber,
+    contentTextStyle: TextStyle(fontSize: 30),
+  ),
+);
+```
+
+6. `home_page.dart` class contains TextField, TextFormField, ElevatedButton, OutlinedButton,
    TextButton, bodyText, and FloatingActionButton respectively.
+
    ![](screenshots/output.gif)
+
    Code:
 
 ```dart
@@ -174,9 +345,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    super.dispose();
     textFieldController.dispose();
     textFormFieldController.dispose();
+    super.dispose();
   }
 
   @override
@@ -277,176 +448,4 @@ Future<void> showMyDialog(context) async {
   );
 }
 
-```
-
-3. `theme` property of `MaterialApp` widget accepts `ThemeData` widget and defines all theming
-   properties here. These properties are automatically applied to the corresponding fields
-   automatically in app everywhere.
-   ![](screenshots/ThemeDataGeneralConfig.PNG)
-   ![](screenshots/ThemeDataColor.PNG)
-   ![](screenshots/ThemeDataTypography.PNG)
-   ![](screenshots/ThemeDataComponentThemes1.PNG)
-   ![](screenshots/ThemeDataComponentThemes2.PNG)
-
-4. For Text of body and TextField label, text style is defined in textTheme with bodyMedium and
-   titleMedium:
-
-```dart 
-        textTheme: const TextTheme(
-          // For text of body
-          bodyMedium: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-          // For text of TextField and TextFormField
-          titleMedium: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.green,
-          ),
-          // Customized text style
-          displaySmall: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-        ),
-```
-
-`displaySmall` is used to to directly apply this style to any text widget. It is used in the last
-children of Column in HomePage widget.
-
-4. elevatedButtonTheme:
-
-```dart 
-
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueAccent,
-            foregroundColor: Colors.amber,
-            shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 50,
-            ),
-            textStyle: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-            elevation: 10,
-            minimumSize: const Size(250, 50),
-          ),
-        ),
-```
-
-5. outlinedButtonTheme:
-
-```dart 
-
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            // shape: const CircleBorder(eccentricity: .9),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 50,
-            ),
-            textStyle: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-            elevation: 10,
-            minimumSize: const Size(250, 50),
-          ),
-        ),
-```
-
-6. textButtonTheme:
-
-```dart 
-
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.green,
-            backgroundColor: Colors.red,
-            shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 50,
-            ),
-            textStyle: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-            ),
-            elevation: 0,
-            minimumSize: const Size(300, 50),
-          ),
-        ),
-```
-
-7. floatingActionButtonTheme:
-
-```dart 
-
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          shape: BeveledRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          iconSize: 50,
-          elevation: 30,
-          backgroundColor: Colors.amber,
-        ),
-```
-
-8. toolTipTheme:
-
-```dart 
-
-        tooltipTheme: TooltipThemeData(
-          textStyle: const TextStyle(fontSize: 20, color: Colors.black),
-          decoration: BoxDecoration(
-            color: Colors.grey[500],
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-```
-
-9. dialogTheme:
-
-```dart 
-
-        dialogTheme: DialogTheme(
-          titleTextStyle: const TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-          contentTextStyle: const TextStyle(
-            fontSize: 20,
-            color: Colors.amber,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ),
-```
-
-10. snackBarTheme:
-
-```dart 
-
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: Colors.blueGrey,
-          actionTextColor: Colors.amber,
-          contentTextStyle: TextStyle(fontSize: 30),
-        ),
 ```
