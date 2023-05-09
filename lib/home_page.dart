@@ -23,9 +23,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    super.dispose();
     textFieldController.dispose();
     textFormFieldController.dispose();
+    super.dispose();
   }
 
   @override

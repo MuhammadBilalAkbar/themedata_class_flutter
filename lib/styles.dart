@@ -87,3 +87,8 @@ const dialogTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Colors.red,
 );
+
+const tooltipTextStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+);
