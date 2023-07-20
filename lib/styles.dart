@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-const bodyMediumStyle = TextStyle(
+const appBarTitleTextStyle = TextStyle(
   fontSize: 30,
   fontWeight: FontWeight.bold,
 );
 
-const titleMediumStyle = TextStyle(
+const bodyMediumStyle = TextStyle(
   fontSize: 30,
   fontWeight: FontWeight.bold,
-  color: Colors.green,
 );
 
 const displaySmallStyle = TextStyle(
@@ -17,9 +16,10 @@ const displaySmallStyle = TextStyle(
   color: Colors.red,
 );
 
-const appBarTitleTextStyle = TextStyle(
+const titleMediumStyle = TextStyle(
   fontSize: 30,
   fontWeight: FontWeight.bold,
+  color: Colors.green,
 );
 
 final elevatedButtonStyle = ElevatedButton.styleFrom(
@@ -38,6 +38,17 @@ final elevatedButtonStyle = ElevatedButton.styleFrom(
   ),
   elevation: 10,
   minimumSize: const Size(250, 50),
+);
+
+const dialogContentTextStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.amber,
+);
+
+const dialogTitleTextStyle = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+  color: Colors.red,
 );
 
 final outlinedButtonStyle = OutlinedButton.styleFrom(
@@ -75,17 +86,6 @@ final textButtonStyle = TextButton.styleFrom(
   ),
   elevation: 0,
   minimumSize: const Size(300, 50),
-);
-
-const dialogContentTextStyle = TextStyle(
-  fontSize: 20,
-  color: Colors.amber,
-);
-
-const dialogTitleTextStyle = TextStyle(
-  fontSize: 30,
-  fontWeight: FontWeight.bold,
-  color: Colors.red,
 );
 
 const tooltipTextStyle = TextStyle(

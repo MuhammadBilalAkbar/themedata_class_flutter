@@ -38,6 +38,16 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
+                const Text(
+                  'You have pushed FAB button this many times:',
+                ),
+                Text('$counter'),
+                const SizedBox(height: 20),
+                Text(
+                  'Its text style is changed using theme property.',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(height: 20),
                 TextField(
                   controller: textFieldController,
                   decoration: const InputDecoration(
@@ -75,16 +85,6 @@ class _HomePageState extends State<HomePage> {
                 TextButton(
                   onPressed: () {},
                   child: const Text('TextButton'),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'You have pushed FAB button this many times:',
-                ),
-                Text('$counter'),
-                const SizedBox(height: 20),
-                Text(
-                  'Its text style is changed using theme property.',
-                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               ],
             ),

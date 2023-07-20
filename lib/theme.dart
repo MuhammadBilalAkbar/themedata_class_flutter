@@ -11,13 +11,25 @@ final myTheme = ThemeData(
   textTheme: const TextTheme(
     // For text of body
     bodyMedium: bodyMediumStyle,
-    // For text of TextField and TextFormField
-    titleMedium: titleMediumStyle,
     // Customized text style
     displaySmall: displaySmallStyle,
+    // For text of TextField and TextFormField
+    titleMedium: titleMediumStyle,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
+  dialogTheme: DialogTheme(
+    titleTextStyle: dialogTitleTextStyle,
+    contentTextStyle: dialogContentTextStyle,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30),
+    ),
+  ),
   outlinedButtonTheme: OutlinedButtonThemeData(style: outlinedButtonStyle),
+  snackBarTheme: const SnackBarThemeData(
+    backgroundColor: Colors.blueGrey,
+    actionTextColor: Colors.amber,
+    contentTextStyle: TextStyle(fontSize: 30),
+  ),
   textButtonTheme: TextButtonThemeData(style: textButtonStyle),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     shape: BeveledRectangleBorder(
@@ -34,17 +46,5 @@ final myTheme = ThemeData(
       shape: BoxShape.rectangle,
       borderRadius: BorderRadius.circular(10),
     ),
-  ),
-  dialogTheme: DialogTheme(
-    titleTextStyle: dialogTitleTextStyle,
-    contentTextStyle: dialogContentTextStyle,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30),
-    ),
-  ),
-  snackBarTheme: const SnackBarThemeData(
-    backgroundColor: Colors.blueGrey,
-    actionTextColor: Colors.amber,
-    contentTextStyle: TextStyle(fontSize: 30),
   ),
 );
